@@ -18,7 +18,7 @@ class CategoryFactory extends Factory
     {
         return [
             'parent_id' => null,
-            'title' => $this->faker->jobTitle(),
+            'title' => [config('app.locale') => $this->faker->jobTitle()],
             'description' => $this->faker->paragraphs(3, true),
         ];
     }
