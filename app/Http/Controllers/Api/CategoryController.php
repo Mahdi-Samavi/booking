@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CategoryRequest;
 use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -24,21 +25,10 @@ class CategoryController extends Controller
     {
         $category = Category::query();
 
-        if ($request->has('ids')) {
-            $category->whereIn('id', explode(',', $request->ids));
-        }
-
-        if ($request->has('name')) {
-            $category->where('name', $request->name);
-        }
-
-        if ($request->has('parent_id')) {
-            $category->where('parent_id', $request->parent_id);
-        }
-
-        if ($request->has('orderBy')) {
-            $category->orderBy(...explode(',', $request->orderBy));
-        }
+        $request->has('ids') ? $category->whereIn('id', explode(',', $request->ids)) : '';
+        $request->has('title') ? $category->where('title', 'like', '%'.$request->title.'%') : '';
+        $request->has('parent_id') ? $category->where('parent_id', $request->parent_id) : '';
+        $request->has('orderBy') ? $category->orderBy(...explode(',', $request->orderBy)) : '';
 
         return new CategoryCollection($category->paginate());
     }
@@ -51,9 +41,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $image = $this->uploadImg($request);
+        $category = Category::create($request->safe()->except('image'));
 
-        Category::create($request->safe()->except('image') + compact('image'));
+        $this->uploadImg($request, $category);
 
         return response()->json(['message' => __('Category created successfully.')]);
     }
@@ -66,7 +56,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return response()->json($category->toArray());
+        return new CategoryResource($category);
     }
 
     /**
@@ -78,9 +68,9 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $image = $this->uploadImg($request);
+        $category->update($request->safe()->except('image'));
 
-        $category->update($request->safe()->except('image') + compact('image'));
+        $this->uploadImg($request, $category);
 
         return response()->json(['message' => __('Category updated successfully.')]);
     }
@@ -95,19 +85,16 @@ class CategoryController extends Controller
     {
         $category->delete();
 
+        $category->media()->delete();
+
         return response()->json(['message' => __('Category removed successfully.')]);
     }
 
-    private function uploadImg($request): string
+    private function uploadImg($request, $category)
     {
-        $image = null;
-
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $image = $file->getClientOriginalName();
-            $file->store('public/img/categories');
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $category->media()->delete();
+            $category->addMediaFromRequest('image')->toMediaCollection('image');
         }
-
-        return $image;
     }
 }
