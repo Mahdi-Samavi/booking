@@ -27,5 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
+    Route::apiResource('token', TokenController::class)->except('show', 'update');
     Route::apiResource('category', CategoryController::class);
 });
