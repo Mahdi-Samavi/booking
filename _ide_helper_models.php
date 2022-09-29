@@ -43,6 +43,40 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Provider
+ *
+ * @property int $id
+ * @property string $firstname
+ * @property string $lastname
+ * @property string $image
+ * @property string $email
+ * @property string $phone
+ * @property string $biography
+ * @property int $holiday_work
+ * @property int $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\ProviderFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereBiography($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereFirstname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereHolidayWork($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereLastname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereUpdatedAt($value)
+ */
+	class Provider extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
