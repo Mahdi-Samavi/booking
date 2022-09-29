@@ -18,7 +18,6 @@ class CategoryFactory extends Factory
     {
         return [
             'parent_id' => null,
-            'image' => null,
             'title' => $this->faker->jobTitle(),
             'description' => $this->faker->paragraphs(3, true),
         ];
