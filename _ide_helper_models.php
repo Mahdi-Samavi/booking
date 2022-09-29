@@ -22,6 +22,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
+ * @property-read int|null $media_count
  * @method static \Database\Factories\CategoryFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
@@ -38,7 +40,41 @@ namespace App\Models{
  * @method static \Illuminate\Database\Query\Builder|Category withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Category withoutTrashed()
  */
-	class Category extends \Eloquent {}
+	class Category extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Provider
+ *
+ * @property int $id
+ * @property string $firstname
+ * @property string $lastname
+ * @property string $email
+ * @property string $phone
+ * @property string $biography
+ * @property int $holiday_work
+ * @property int $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
+ * @property-read int|null $media_count
+ * @method static \Database\Factories\ProviderFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereBiography($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereFirstname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereHolidayWork($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereLastname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Provider whereUpdatedAt($value)
+ */
+	class Provider extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models{
