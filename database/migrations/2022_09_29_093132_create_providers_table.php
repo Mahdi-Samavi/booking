@@ -18,9 +18,11 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email');
+            $table->string('password');
             $table->string('phone');
             $table->longText('biography');
             $table->boolean('holiday_work');
+            $table->json('activities');
             $table->boolean('status');
             $table->timestamps();
         });
