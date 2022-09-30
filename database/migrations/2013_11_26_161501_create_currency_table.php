@@ -31,6 +31,7 @@ class CreateCurrencyTable extends Migration
             $table->string('name');
             $table->string('code', 10)->index();
             $table->string('symbol', 25);
+            $table->string('symbol_native', 25);
             $table->string('format', 50);
             $table->string('exchange_rate');
             $table->boolean('active')->default(false);
