@@ -52,7 +52,7 @@ class User extends Authenticatable
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: fn ($value, $attribute) => bcrypt($value),
+            set: fn ($value) => bcrypt($value),
         );
     }
 }
