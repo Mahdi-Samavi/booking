@@ -70,7 +70,7 @@ namespace App\Models{
  * @property string $phone
  * @property string $biography
  * @property int $holiday_work
- * @property mixed $activities
+ * @property array $activities
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -78,6 +78,7 @@ namespace App\Models{
  * @property-read int|null $categories_count
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
  * @property-read int|null $media_count
+ * @property-read \App\Models\Service|null $service
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\ProviderFactory factory(...$parameters)
@@ -105,20 +106,30 @@ namespace App\Models{
  * App\Models\Service
  *
  * @property int $id
- * @property string $title
- * @property string $duration
+ * @property mixed $title
+ * @property float $amount
  * @property string $description
+ * @property string $duration
+ * @property string $presence_type
+ * @property int $capacity
+ * @property string $cancel_at
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Provider[] $providers
+ * @property-read int|null $providers_count
  * @method static \Database\Factories\ServiceFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Service newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Service newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Service query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereCancelAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereCapacity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereDuration($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service wherePresenceType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereUpdatedAt($value)
