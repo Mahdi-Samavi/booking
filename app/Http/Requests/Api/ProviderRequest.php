@@ -26,6 +26,8 @@ class ProviderRequest extends FormRequest
         $isUnique = in_array('POST', request()->route()->methods()) ? 'unique:providers,email' : '';
 
         return [
+            'category' => ['required', 'array'],
+            'category.*' => ['exists:categories,id'],
             'firstname' => ['required', 'string'],
             'lastname' => ['required', 'string'],
             'avatar' => ['required', 'image'],

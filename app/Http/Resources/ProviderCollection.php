@@ -32,6 +32,9 @@ class ProviderCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return ['data' => $this->collection, ...$this->pagination];
+        return [
+            'data' => ProviderResource::collection($this->collection),
+            ...$this->pagination,
+        ];
     }
 }

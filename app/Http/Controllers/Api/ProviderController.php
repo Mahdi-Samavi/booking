@@ -43,7 +43,8 @@ class ProviderController extends Controller
      */
     public function store(ProviderRequest $request)
     {
-        $provider = Provider::create($request->safe()->except('avatar'));
+        $provider = Provider::create($request->safe()->except('avatar', 'category'));
+        $provider->categories()->attach($request->category);
 
         $this->uploadImg($request, $provider);
 
@@ -70,7 +71,8 @@ class ProviderController extends Controller
      */
     public function update(ProviderRequest $request, Provider $provider)
     {
-        $provider->update($request->safe()->except('avatar'));
+        $provider->update($request->safe()->except('avatar', 'category'));
+        $provider->categories()->attach($request->category);
 
         $this->uploadImg($request, $provider);
 
