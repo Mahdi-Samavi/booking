@@ -6,6 +6,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -55,7 +56,14 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'error' => 'ACCESS_DENIED',
                     'message' => __('You don\'t have permission for do this action.'),
-                ]);
+                ], 403);
+            }
+
+            if ($e instanceof NotFoundHttpException) {
+                return response()->json([
+                    'error' => 'PRODUCT_ID_INVALID',
+                    'message' => __('The product id is invalid.'),
+                ], 404);
             }
         });
     }

@@ -19,6 +19,7 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \App\Http\Resources\CategoryCollection
      */
     public function index(Request $request)
@@ -45,7 +46,7 @@ class CategoryController extends Controller
 
         $this->uploadImg($request, $category);
 
-        return response()->json(['message' => __('Category created successfully.')]);
+        return $this->validResponse(['message' => __('Category created successfully.')]);
     }
 
     /**
@@ -72,7 +73,7 @@ class CategoryController extends Controller
 
         $this->uploadImg($request, $category);
 
-        return response()->json(['message' => __('Category updated successfully.')]);
+        return $this->validResponse(['message' => __('Category updated successfully.')]);
     }
 
     /**
@@ -87,7 +88,7 @@ class CategoryController extends Controller
 
         $category->media()->delete();
 
-        return response()->json(['message' => __('Category removed successfully.')]);
+        return $this->validResponse(['message' => __('Category removed successfully.')]);
     }
 
     private function uploadImg($request, $category)

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ProviderCollection extends ResourceCollection
+class ServiceCollection extends ResourceCollection
 {
     private array $pagination;
 
@@ -32,6 +32,9 @@ class ProviderCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return ['data' => $this->collection, ...$this->pagination];
+        return [
+            'data' => ServiceResource::collection($this->collection),
+            ...$this->pagination,
+        ];
     }
 }

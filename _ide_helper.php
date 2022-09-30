@@ -17183,7 +17183,173 @@
      
 }
 
-        namespace Intervention\Image\Facades { 
+        namespace Torann\Currency\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class Currency {
+                    /**
+         * Format given number.
+         *
+         * @param float $amount
+         * @param string $from
+         * @param string $to
+         * @param bool $format
+         * @return string|null 
+         * @static 
+         */ 
+        public static function convert($amount, $from = null, $to = null, $format = true)
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->convert($amount, $from, $to, $format);
+        }
+                    /**
+         * Format the value into the desired currency.
+         *
+         * @param float $value
+         * @param string $code
+         * @param bool $include_symbol
+         * @return string 
+         * @static 
+         */ 
+        public static function format($value, $code = null, $include_symbol = true)
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->format($value, $code, $include_symbol);
+        }
+                    /**
+         * Set user's currency.
+         *
+         * @param string $code
+         * @static 
+         */ 
+        public static function setUserCurrency($code)
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->setUserCurrency($code);
+        }
+                    /**
+         * Return the user's currency code.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getUserCurrency()
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->getUserCurrency();
+        }
+                    /**
+         * Determine if the provided currency is valid.
+         *
+         * @param string $code
+         * @return array|null 
+         * @static 
+         */ 
+        public static function hasCurrency($code)
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->hasCurrency($code);
+        }
+                    /**
+         * Determine if the provided currency is active.
+         *
+         * @param string $code
+         * @return bool 
+         * @static 
+         */ 
+        public static function isActive($code)
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->isActive($code);
+        }
+                    /**
+         * Return the current currency if the
+         * one supplied is not valid.
+         *
+         * @param string $code
+         * @return array|null 
+         * @static 
+         */ 
+        public static function getCurrency($code = null)
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->getCurrency($code);
+        }
+                    /**
+         * Return all currencies.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getCurrencies()
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->getCurrencies();
+        }
+                    /**
+         * Return all active currencies.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getActiveCurrencies()
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->getActiveCurrencies();
+        }
+                    /**
+         * Get storage driver.
+         *
+         * @return \Torann\Currency\Contracts\DriverInterface 
+         * @static 
+         */ 
+        public static function getDriver()
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->getDriver();
+        }
+                    /**
+         * Get formatter driver.
+         *
+         * @return \Torann\Currency\Contracts\FormatterInterface 
+         * @static 
+         */ 
+        public static function getFormatter()
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->getFormatter();
+        }
+                    /**
+         * Clear cached currencies.
+         *
+         * @static 
+         */ 
+        public static function clearCache()
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->clearCache();
+        }
+                    /**
+         * Get configuration value.
+         *
+         * @param string $key
+         * @param mixed $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function config($key = null, $default = null)
+        {
+                        /** @var \Torann\Currency\Currency $instance */
+                        return $instance->config($key, $default);
+        }
+         
+    }
+     
+}
+
+    namespace Intervention\Image\Facades { 
             /**
      * 
      *
@@ -21456,6 +21622,7 @@ namespace  {
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
+            class Currency extends \Torann\Currency\Facades\Currency {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      

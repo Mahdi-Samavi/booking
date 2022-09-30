@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use App\Models\Provider;
+use App\Models\Service;
 use Illuminate\Database\Seeder;
 
-class ProviderSeeder extends Seeder
+class ServiceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,11 +15,11 @@ class ProviderSeeder extends Seeder
      */
     public function run()
     {
-        Provider::truncate();
+        Service::truncate();
 
-        Provider::factory(5)
-            ->afterCreating(function ($provider) {
-                $provider->categories()->attach(
+        Service::factory(5)
+            ->afterCreating(function ($service) {
+                $service->categories()->attach(
                     Category::inRandomOrder()->limit(2)->pluck('id')
                 );
             })

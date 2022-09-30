@@ -32,9 +32,11 @@ class ProviderRequest extends FormRequest
             'lastname' => ['required', 'string'],
             'avatar' => ['required', 'image'],
             'email' => ['required', 'email', $isUnique],
-            'phone' => ['required', 'numeric'],
+            'password' => ['required', 'string'],
+            'phone' => ['required', 'string', 'min:8'],
             'biography' => ['required', 'string'],
             'holiday_work' => ['required', 'boolean'],
+            'activities' => ['required', 'array'],
             'status' => ['required', 'boolean'],
         ];
     }
