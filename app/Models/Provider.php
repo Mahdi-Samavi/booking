@@ -20,7 +20,16 @@ class Provider extends Authenticatable implements HasMedia
      */
     protected $fillable = [
         'firstname', 'lastname', 'email', 'password',
-        'phone', 'biography', 'holiday_work', 'status',
+        'phone', 'biography', 'holiday_work', 'activities', 'status',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'activities' => 'array',
     ];
 
     /**
@@ -33,6 +42,11 @@ class Provider extends Authenticatable implements HasMedia
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
     }
 
     /**

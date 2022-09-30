@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Provider;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +17,12 @@ class ProviderSeeder extends Seeder
     {
         Provider::truncate();
 
-        Provider::factory(5)->create();
+        Provider::factory(5)
+            ->afterCreating(function ($provider) {
+                $provider->categories()->attach(
+                    Category::inRandomOrder()->limit(2)->pluck('id')
+                );
+            })
+            ->create();
     }
 }

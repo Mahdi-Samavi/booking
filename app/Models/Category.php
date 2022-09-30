@@ -24,6 +24,11 @@ class Category extends Model implements HasMedia
         'parent_id', 'title', 'description',
     ];
 
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
+
     public function providers()
     {
         return $this->belongsToMany(Provider::class);

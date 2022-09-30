@@ -19,6 +19,7 @@ class ProviderController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -48,7 +49,7 @@ class ProviderController extends Controller
 
         $this->uploadImg($request, $provider);
 
-        return response()->json(['message' => __('Provider created successfully.')]);
+        return $this->validResponse(['message' => __('Provider created successfully.')]);
     }
 
     /**
@@ -76,7 +77,7 @@ class ProviderController extends Controller
 
         $this->uploadImg($request, $provider);
 
-        return response()->json(['message' => __('Provider updated successfully.')]);
+        return $this->validResponse(['message' => __('Provider updated successfully.')]);
     }
 
     /**
@@ -91,7 +92,7 @@ class ProviderController extends Controller
 
         $provider->media()->delete();
 
-        return response()->json(['message' => __('Provider removed successfully.')]);
+        return $this->validResponse(['message' => __('Provider removed successfully.')]);
     }
 
     private function uploadImg($request, $provider)
