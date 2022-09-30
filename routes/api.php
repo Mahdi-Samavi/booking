@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProviderController;
+use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\TokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,4 +33,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('token', TokenController::class)->except('show', 'update');
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('provider', ProviderController::class);
+    Route::apiResource('service', ServiceController::class);
 });
