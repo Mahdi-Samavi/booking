@@ -79,6 +79,18 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Service
+ *
+ * @method static \Database\Factories\ServiceFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Service newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Service query()
+ */
+	class Service extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id

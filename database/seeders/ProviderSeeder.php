@@ -16,6 +16,6 @@ class ProviderSeeder extends Seeder
     {
         Provider::truncate();
 
-        Provider::factory(15)->create();
+        Provider::factory(5)->create();
     }
 }

@@ -20,9 +20,11 @@ class ProviderFactory extends Factory
             'firstname' => $this->faker->firstName(),
             'lastname' => $this->faker->lastName(),
             'email' => $this->faker->email(),
+            'password' => 'password',
             'phone' => $this->faker->phoneNumber(),
             'biography' => $this->faker->paragraphs(3, true),
             'holiday_work' => $this->faker->boolean(),
+            'activities' => json_encode([]),
             'status' => $this->faker->boolean(),
         ];
     }
