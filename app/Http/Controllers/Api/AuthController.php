@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\AuthRequest;
+use App\Http\Requests\Api\CustomerRequest;
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +23,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::create($request->only('name', 'email', 'password'));
-        $token = TokenController::createToken($user, $request->device_name);
+        $token = TokenController::createToken($user, $request->device_name, ['admin:*']);
 
         return $this->validResponse([
             'access_token' => $token->plainTextToken,
@@ -36,7 +38,7 @@ class AuthController extends Controller
         $this->check($request);
 
         $user = Auth::user();
-        $token = TokenController::createToken($user, $request->device_name);
+        $token = TokenController::createToken($user, $request->device_name, ['admin:*']);
 
         return $this->validResponse([
             'access_token' => $token->plainTextToken,
@@ -51,12 +53,40 @@ class AuthController extends Controller
         $this->check($request, 'provider');
 
         $user = Auth::guard('provider')->user();
-        $token = TokenController::createToken($user, $request->device_name);
+        $token = TokenController::createToken($user, $request->device_name, ['provider:*']);
 
         return $this->validResponse([
             'access_token' => $token->plainTextToken,
             'token_type' => 'Bearer',
             'roles' => ['user'],
+            'expires_in' => $token->accessToken->expires_at,
+        ]);
+    }
+
+    public function customerRegister(CustomerRequest $request)
+    {
+        $customer = Customer::create($request->safe()->except('device_name'));
+        $token = TokenController::createToken($customer, $request->device_name, ['customer:*']);
+
+        return $this->validResponse([
+            'access_token' => $token->plainTextToken,
+            'token_type' => 'Bearer',
+            'roles' => ['customer'],
+            'expires_in' => $token->accessToken->expires_at,
+        ]);
+    }
+
+    public function customerLogin(AuthRequest $request)
+    {
+        $this->check($request, 'customer');
+
+        $customer = Auth::guard('customer')->user();
+        $token = TokenController::createToken($customer, $request->device_name, ['customer:*']);
+
+        return $this->validResponse([
+            'access_token' => $token->plainTextToken,
+            'token_type' => 'Bearer',
+            'roles' => ['customer'],
             'expires_in' => $token->accessToken->expires_at,
         ]);
     }

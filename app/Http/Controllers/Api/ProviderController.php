@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ProviderRequest;
+use App\Http\Resources\AppointmentCollection;
 use App\Http\Resources\ProviderCollection;
 use App\Http\Resources\ProviderResource;
 use App\Models\Provider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProviderController extends Controller
 {
@@ -24,7 +26,7 @@ class ProviderController extends Controller
      */
     public function index(Request $request)
     {
-        $provider = Provider::query();
+        $provider = application()->providers();
 
         $request->has('ids') ? $provider->whereIn('id', explode(',', $request->ids)) : '';
         $request->has('firstname') ? $provider->where('firstname', 'like', '%'.$request->firstname.'%') : '';
@@ -44,7 +46,7 @@ class ProviderController extends Controller
      */
     public function store(ProviderRequest $request)
     {
-        $provider = Provider::create($request->safe()->except('avatar', 'category'));
+        $provider = application()->providers()->create($request->safe()->except('avatar', 'category'));
         $provider->categories()->attach($request->category);
 
         $this->uploadImg($request, $provider);
@@ -93,6 +95,15 @@ class ProviderController extends Controller
         $provider->media()->delete();
 
         return $this->validResponse(['message' => __('Provider removed successfully.')]);
+    }
+
+    public function appointments()
+    {
+        $user = Auth::user();
+
+        $appointments = application()->appointments()->where('customer_id', $user->id)->get();
+
+        return new AppointmentCollection($appointments);
     }
 
     private function uploadImg($request, $provider)

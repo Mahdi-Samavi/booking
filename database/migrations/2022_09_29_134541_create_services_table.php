@@ -18,10 +18,10 @@ return new class extends Migration
             $table->json('title');
             $table->float('amount');
             $table->longText('description');
-            $table->string('duration');
+            $table->integer('duration')->comment('to the minute');
             $table->enum('presence_type', ['in-person', 'zoom', 'google meet']);
             $table->integer('capacity', false, true);
-            $table->string('cancel_at');
+            $table->integer('cancel_at')->comment('to the minute');
             $table->boolean('status');
             $table->timestamps();
         });

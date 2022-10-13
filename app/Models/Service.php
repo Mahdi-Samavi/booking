@@ -32,6 +32,11 @@ class Service extends Model implements HasMedia
      */
     protected $appends = ['cover', 'gallery'];
 
+    public function apps()
+    {
+        return $this->morphToMany(App::class, 'trackable');
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class);

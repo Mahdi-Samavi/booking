@@ -2,11 +2,11 @@
 
 namespace App\Policies\Api;
 
-use App\Models\Category;
+use App\Models\Appointment;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CategoryPolicy
+class AppointmentPolicy
 {
     use HandlesAuthorization;
 
@@ -25,12 +25,12 @@ class CategoryPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Category $category)
+    public function view(User $user, Appointment $appointment)
     {
-        return $this->checkMorph($category);
+        return true;
     }
 
     /**
@@ -41,41 +41,41 @@ class CategoryPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->tokenCan('customer:*');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Category $category)
+    public function update(User $user, Appointment $appointment)
     {
-        return $this->checkMorph($category);
+        return true;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Category $category)
+    public function delete(User $user, Appointment $appointment)
     {
-        return $this->checkMorph($category);
+        return true;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Category $category)
+    public function restore(User $user, Appointment $appointment)
     {
         return true;
     }
@@ -84,16 +84,11 @@ class CategoryPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Category $category)
+    public function forceDelete(User $user, Appointment $appointment)
     {
         return true;
-    }
-
-    private function checkMorph($category)
-    {
-        return application()->categories()->where('id', $category->id)->exists();
     }
 }

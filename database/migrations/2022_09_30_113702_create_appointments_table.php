@@ -15,9 +15,12 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('customer_id')->constrained();
             $table->foreignId('provider_id')->constrained();
             $table->foreignId('service_id')->constrained();
+            $table->string('duration')->comment('to the minute');
+            $table->float('amount');
+            $table->enum('status', ['waiting', 'doing', 'finished']);
             $table->dateTime('start_at');
             $table->longText('details');
             $table->timestamps();

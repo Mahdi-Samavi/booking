@@ -24,6 +24,11 @@ class Category extends Model implements HasMedia
         'parent_id', 'title', 'description',
     ];
 
+    public function apps()
+    {
+        return $this->morphToMany(App::class, 'trackable');
+    }
+
     public function services()
     {
         return $this->belongsToMany(Service::class);

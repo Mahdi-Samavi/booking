@@ -186,6 +186,7 @@ return [
          * Package Service Providers...
          */
         \Torann\Currency\CurrencyServiceProvider::class,
+        // \Srmklive\PayPal\Providers\PayPalServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -211,6 +212,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Currency' => \Torann\Currency\Facades\Currency::class,
+        // 'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
     ])->toArray(),
 
 ];

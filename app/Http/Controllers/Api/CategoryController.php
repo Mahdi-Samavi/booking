@@ -24,7 +24,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $category = Category::query();
+        $category = application()->categories();
 
         $request->has('ids') ? $category->whereIn('id', explode(',', $request->ids)) : '';
         $request->has('title') ? $category->where('title', 'like', '%'.$request->title.'%') : '';
@@ -42,7 +42,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = Category::create($request->safe()->except('image'));
+        $category = application()->categories()->create($request->safe()->except('image'));
 
         $this->uploadImg($request, $category);
 

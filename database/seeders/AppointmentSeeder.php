@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Appointment;
+use App\Models\Customer;
 use App\Models\Provider;
 use App\Models\Service;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class AppointmentSeeder extends Seeder
@@ -21,7 +21,7 @@ class AppointmentSeeder extends Seeder
 
         Appointment::factory(5)
             ->state([
-                'user_id' => fn () => User::inRandomOrder()->first('id'),
+                'customer_id' => fn () => Customer::inRandomOrder()->first('id'),
                 'provider_id' => fn () => Provider::inRandomOrder()->first('id'),
                 'service_id' => fn () => Service::inRandomOrder()->first('id'),
             ])

@@ -30,7 +30,7 @@ class ServicePolicy
      */
     public function view(User $user, Service $service)
     {
-        return true;
+        return $this->checkMorph($service);
     }
 
     /**
@@ -53,7 +53,7 @@ class ServicePolicy
      */
     public function update(User $user, Service $service)
     {
-        return true;
+        return $this->checkMorph($service);
     }
 
     /**
@@ -65,7 +65,7 @@ class ServicePolicy
      */
     public function delete(User $user, Service $service)
     {
-        return true;
+        return $this->checkMorph($service);
     }
 
     /**
@@ -90,5 +90,10 @@ class ServicePolicy
     public function forceDelete(User $user, Service $service)
     {
         return true;
+    }
+
+    private function checkMorph($service)
+    {
+        return application()->services()->where('id', $service->id)->exists();
     }
 }

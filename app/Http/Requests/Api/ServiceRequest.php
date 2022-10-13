@@ -32,10 +32,10 @@ class ServiceRequest extends FormRequest
             'cover' => ['required', 'image'],
             'gallery' => ['required'],
             'gallery.*' => ['image'],
-            'duration' => ['required', 'string'],
+            'duration' => ['required', 'numeric'],
             'presence_type' => ['required', 'in:in-person,zoom,"google meet"'],
             'capacity' => ['required', 'numeric'],
-            'cancel_at' => ['required', 'string'],
+            'cancel_at' => ['required', 'numeric'],
             'status' => ['required', 'boolean'],
         ];
     }

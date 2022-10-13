@@ -17,6 +17,8 @@ class AppointmentFactory extends Factory
     public function definition()
     {
         return [
+            'amount' => $this->faker->numberBetween(10, 500),
+            'duration' => $this->faker->numberBetween(30, 120),
             'start_at' => now()->addDays(random_int(1, 20)),
             'details' => $this->faker->paragraphs(2, true),
         ];

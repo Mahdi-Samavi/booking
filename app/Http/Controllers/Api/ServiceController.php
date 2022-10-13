@@ -24,9 +24,7 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
-        $service = Service::first();
-        dd($service->categories()->get()->toArray());
-        $service = Service::query();
+        $service = application()->services();
 
         $request->has('ids') ? $service->whereIn('id', explode(',', $request->ids)) : '';
         $request->has('title') ? $service->where('title', 'like', '%'.$request->title.'%') : '';
@@ -45,7 +43,7 @@ class ServiceController extends Controller
      */
     public function store(ServiceRequest $request)
     {
-        $service = Service::create($request->safe()->except('cover', 'gallery'));
+        $service = application()->services()->create($request->safe()->except('cover', 'gallery'));
         $service->categories()->attach($request->category);
 
         $this->uploadImg($request, $service);

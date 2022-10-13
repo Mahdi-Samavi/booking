@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     use HasFactory;
+
+    public function apps()
+    {
+        return $this->morphToMany(App::class, 'trackable');
+    }
 }

@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Provider extends Authenticatable implements HasMedia
+class Customer extends Authenticatable
 {
-    use HasApiTokens, HasFactory, InteractsWithMedia;
+    use HasApiTokens, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -19,8 +17,8 @@ class Provider extends Authenticatable implements HasMedia
      * @var array<int, string>
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password',
-        'phone', 'biography', 'holiday_work', 'activities', 'status',
+        'name', 'email', 'password', 'birthday', 'phone',
+        'country', 'state', 'city', 'address', 'zipcode',
     ];
 
     /**
@@ -38,29 +36,12 @@ class Provider extends Authenticatable implements HasMedia
      * @var array<string, string>
      */
     protected $casts = [
-        'activities' => 'array',
+        'birthday' => 'date',
     ];
-
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = ['avatar'];
 
     public function apps()
     {
         return $this->morphToMany(App::class, 'trackable');
-    }
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
-    }
-
-    public function service()
-    {
-        return $this->belongsTo(Service::class);
     }
 
     /**
@@ -72,13 +53,6 @@ class Provider extends Authenticatable implements HasMedia
     {
         return Attribute::make(
             set: fn ($value) => bcrypt($value),
-        );
-    }
-
-    protected function avatar(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => $this->getFirstMediaUrl('avatar'),
         );
     }
 }

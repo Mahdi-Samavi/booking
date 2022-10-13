@@ -30,7 +30,7 @@ class ProviderPolicy
      */
     public function view(User $user, Provider $provider)
     {
-        return true;
+        return $this->checkMorph($provider);
     }
 
     /**
@@ -53,7 +53,7 @@ class ProviderPolicy
      */
     public function update(User $user, Provider $provider)
     {
-        return true;
+        return $this->checkMorph($provider);
     }
 
     /**
@@ -65,7 +65,7 @@ class ProviderPolicy
      */
     public function delete(User $user, Provider $provider)
     {
-        return true;
+        return $this->checkMorph($provider);
     }
 
     /**
@@ -90,5 +90,10 @@ class ProviderPolicy
     public function forceDelete(User $user, Provider $provider)
     {
         return true;
+    }
+
+    private function checkMorph($provider)
+    {
+        return application()->providers()->where('id', $provider->id)->exists();
     }
 }
